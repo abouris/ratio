@@ -1,0 +1,86 @@
+<html><head><base href="https://ratio-calculator.websim.ai" />
+<title>Ratio Calculator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  #result {
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+</style>
+<script type="text/javascript" nonce="3ef5692b142a4420908a6375302" src="//local.adguard.org?ts=1720691028772&amp;type=content-script&amp;dmn=party.websim.ai&amp;url=https%3A%2F%2Fparty.websim.ai%2Fapi%2Fv1%2Fsites%2FgIVIffNJ1z8gyhUlJ%2Fhtml%3Fraw%3Dtrue&amp;app=com.google.Chrome&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script>
+<script type="text/javascript" nonce="3ef5692b142a4420908a6375302" src="//local.adguard.org?ts=1720691028772&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script></head>
+<body>
+  <div class="container">
+    <h1>Ratio Calculator</h1>
+    <form id="ratioForm">
+      <label for="ratio">Ratio (width:height):</label>
+      <input type="text" id="ratio" name="ratio" placeholder="e.g. 16:9" required>
+      
+      <label for="width">Width:</label>
+      <input type="number" id="width" name="width" placeholder="Enter width" required>
+      
+      <button type="submit">Calculate</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('ratioForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const ratio = document.getElementById('ratio').value;
+      const width = parseFloat(document.getElementById('width').value);
+      
+      const [ratioWidth, ratioHeight] = ratio.split(':').map(Number);
+      
+      if (isNaN(ratioWidth) || isNaN(ratioHeight) || isNaN(width)) {
+        document.getElementById('result').textContent = 'Invalid input. Please check your values.';
+        return;
+      }
+      
+      const height = (width / ratioWidth) * ratioHeight;
+      
+      document.getElementById('result').textContent = `Result: ${width} x ${height.toFixed(2)}`;
+    });
+  </script>
+</body></html>
